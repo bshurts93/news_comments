@@ -1,0 +1,26 @@
+{
+  "name": "news_comments",
+  "version": "1.0.0",
+  "description": "News Scraper that stores comments with MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bshurts93/news_comments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bshurts93/news_comments/issues"
+  },
+  "homepage": "https://github.com/bshurts93/news_comments#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.0",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.5.9"
+  }
+}
