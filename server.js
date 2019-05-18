@@ -52,11 +52,16 @@ app.get("/scrape", function(req, res) {
           .find("p")
           .text()
           .trim();
+        var timestamp = $(element)
+          .find("time")
+          .text()
+          .trim();
         console.log(
           "----------------------------------------------------------------------------"
         );
         console.log("Title: " + title);
         console.log("Content: " + content);
+        console.log("Time: " + timestamp);
         console.log(
           "----------------------------------------------------------------------------\r\n\r\n"
         );
