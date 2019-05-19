@@ -33,39 +33,40 @@ app.get("/all", function(req, res) {
 
 // Scrape data from one site and place it into the mongodb db
 app.get("/scrape", function(req, res) {
-  // Make a request via axios for the news section of `ycombinator`
   axios
     .get("https://www.reuters.com/news/archive/technologyNews")
     .then(function(response) {
-      // Load the html body from axios into cheerio
       var $ = cheerio.load(response.data);
 
       // For each element with a "title" class
-      $("article.story").each(function(i, element) {
-        // Save the text and href of each link enclosed in the current element
-        var title = $(element)
-          .find("h3")
-          .attr("class", "story-title")
-          .text()
-          .trim();
-        var content = $(element)
-          .find("p")
-          .text()
-          .trim();
-        var timestamp = $(element)
-          .find("time")
-          .text()
-          .trim();
-        console.log(
-          "----------------------------------------------------------------------------"
-        );
-        console.log("Title: " + title);
-        console.log("Content: " + content);
-        console.log("Time: " + timestamp);
-        console.log(
-          "----------------------------------------------------------------------------\r\n\r\n"
-        );
-      });
+      $(".news-headline-list")
+        .first()
+        .children()
+        .each(function(i, element) {
+          // Save the text and href of each link enclosed in the current element
+          var title = $(element)
+            .find("h3")
+            .attr("class", "story-title")
+            .text()
+            .trim();
+          var content = $(element)
+            .find("p")
+            .text()
+            .trim();
+          var timestamp = $(element)
+            .find("time")
+            .text()
+            .trim();
+          console.log(
+            "----------------------------------------------------------------------------"
+          );
+          console.log("Title: " + title);
+          console.log("Content: " + content);
+          console.log("Time: " + timestamp);
+          console.log(
+            "----------------------------------------------------------------------------\r\n\r\n"
+          );
+        });
     });
 
   // Send a "Scrape Complete" message to the browser
