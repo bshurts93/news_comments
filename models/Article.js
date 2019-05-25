@@ -12,6 +12,10 @@ var ArticleSchema = new Schema({
     type: String,
     trim: true
   },
+  link: {
+    type: String,
+    trim: true
+  },
   timestamp: {
     type: String,
     trim: true

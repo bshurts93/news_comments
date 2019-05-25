@@ -51,6 +51,11 @@ app.get("/scrape", function(req, res) {
             .attr("class", "story-title")
             .text()
             .trim();
+          data.link =
+            "https://www.reuters.com" +
+            $(element)
+              .find("a")
+              .attr("href");
           data.content = $(element)
             .find("p")
             .text()
@@ -60,7 +65,9 @@ app.get("/scrape", function(req, res) {
             .text()
             .trim();
 
+          // console.log("\r\n\r\n-------------------------------");
           // console.log(data);
+          // console.log("-------------------------------");
 
           db.Article.create(data)
             .then(function(dbArticle) {
