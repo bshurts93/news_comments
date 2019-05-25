@@ -4,39 +4,38 @@ var exphbs = require("express-handlebars");
 var axios = require("axios");
 var cheerio = require("cheerio");
 var mongoose = require("mongoose");
+var logger = require("morgan");
 
-// Exress server
+// Require models
+var db = require("./models");
+
+var PORT = 3000;
+
+// Initialize Express
 var app = express();
 
-// Database config
-var databaseUrl = "news_comments";
-var collections = ["scrapedData"];
+// Middleware
 
-// Article Model
-var Article = require("./articleModel");
+app.use(logger("dev"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 
-// Root
-app.get("/", function(req, res) {
-  res.send("Home");
+// Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/newsComments", {
+  useNewUrlParser: true
 });
 
-// Get all from DB
-app.get("/all", function(req, res) {
-  db.scrapedData.find({}, function(err, docs) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(docs);
-    }
-  });
-});
+// Routes
 
-// Scrape data from one site and place it into the mongodb db
+// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   axios
     .get("https://www.reuters.com/news/archive/technologyNews")
     .then(function(response) {
       var $ = cheerio.load(response.data);
+
+      var data = {};
 
       // For each element with a "title" class
       $(".news-headline-list")
@@ -44,28 +43,29 @@ app.get("/scrape", function(req, res) {
         .children()
         .each(function(i, element) {
           // Save the text and href of each link enclosed in the current element
-          var title = $(element)
+          data.title = $(element)
             .find("h3")
             .attr("class", "story-title")
             .text()
             .trim();
-          var content = $(element)
+          data.content = $(element)
             .find("p")
             .text()
             .trim();
-          var timestamp = $(element)
+          data.timestamp = $(element)
             .find("time")
             .text()
             .trim();
-          console.log(
-            "----------------------------------------------------------------------------"
-          );
-          console.log("Title: " + title);
-          console.log("Content: " + content);
-          console.log("Time: " + timestamp);
-          console.log(
-            "----------------------------------------------------------------------------\r\n\r\n"
-          );
+
+          // console.log(data);
+
+          db.Article.create(data)
+            .then(function(dbArticle) {
+              console.log(dbArticle);
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
         });
     });
 
@@ -73,7 +73,61 @@ app.get("/scrape", function(req, res) {
   res.send("Scrape Complete");
 });
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+// // Route for getting all Articles from the db
+// app.get("/articles", function(req, res) {
+//   // TODO: Finish the route so it grabs all of the articles
+//   db.Article.find({}, function(err, docs) {
+//     if (err) {
+//       res.json(err);
+//     } else {
+//       res.json(docs);
+//     }
+//   });
+// });
+
+// // Route for grabbing a specific Article by id, populate it with it's note
+// app.get("/articles/:id", function(req, res) {
+//   // TODO
+//   // ====
+//   // Finish the route so it finds one article using the req.params.id,
+//   // and run the populate method with "note",
+//   // then responds with the article with the note included
+//   db.Article.findOne({ _id: req.params.id })
+//     .populate("note")
+//     .then(function(doc) {
+//       res.json(doc);
+//     })
+//     .catch(function(err) {
+//       res.json(err);
+//     });
+// });
+
+// // Route for saving/updating an Article's associated Note
+// app.post("/articles/:id", function(req, res) {
+//   // TODO
+//   // ====
+//   // save the new note that gets posted to the Notes collection
+//   // then find an article from the req.params.id
+//   // and update it's "note" property with the _id of the new note
+//   db.Note.create(req.body)
+//     .then(function(dbNote) {
+//       return db.Article.findOneAndUpdate(
+//         { _id: req.params.id },
+//         { note: dbNote.id },
+//         { new: true }
+//       );
+//     })
+//     .then(function(dbArticle) {
+//       // If the User was updated successfully, send it back to the client
+//       res.json(dbArticle);
+//     })
+//     .catch(function(err) {
+//       // If an error occurs, send it back to the client
+//       res.json(err);
+//     });
+// });
+
+// Start the server
+app.listen(PORT, function() {
+  console.log("App running on port " + PORT + "!");
 });

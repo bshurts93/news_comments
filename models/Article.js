@@ -7,11 +7,11 @@ var ArticleSchema = new Schema({
     type: String,
     trim: true
   },
-  author: {
+  content: {
     type: String,
     trim: true
   },
-  content: {
+  timestamp: {
     type: String,
     trim: true
   }
