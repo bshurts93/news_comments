@@ -46,6 +46,9 @@ app.get("/scrape", function(req, res) {
         .children()
         .each(function(i, element) {
           // Save the text and href of each link enclosed in the current element
+          data.image = $(element)
+            .find("img")
+            .attr("org-src");
           data.title = $(element)
             .find("h3")
             .attr("class", "story-title")
