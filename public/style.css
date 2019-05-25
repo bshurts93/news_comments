@@ -2,6 +2,10 @@ body {
   background-color: rgb(219, 238, 255);
 }
 
+img {
+  max-width: 200px;
+}
+
 /* ARTICLES VIEW */
 .article-box {
   background-color: rgb(161, 193, 219);

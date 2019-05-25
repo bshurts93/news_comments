@@ -45,10 +45,18 @@ app.get("/scrape", function(req, res) {
         .first()
         .children()
         .each(function(i, element) {
-          // Save the text and href of each link enclosed in the current element
-          data.image = $(element)
-            .find("img")
-            .attr("org-src");
+          if (
+            $(element)
+              .find("img")
+              .attr("class") === "placeholder-image"
+          ) {
+            data.image =
+              "https://pbs.twimg.com/profile_images/877265642742665216/sI-pwn-h_400x400.jpg";
+          } else {
+            data.image = $(element)
+              .find("img")
+              .attr("org-src");
+          }
           data.title = $(element)
             .find("h3")
             .attr("class", "story-title")
