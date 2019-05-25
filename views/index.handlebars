@@ -1,12 +1,19 @@
-<h1>{{message}}</h1>
+<h1 class="text-center">{{message}}</h1>
 
-<ul>
-  {{#each articles}}
+<div class="container">
+  <div class="article-box">
+    {{#each articles}}
+    <div class="article">
+      <h3>{{title}}</h3>
+      <p>{{content}}</p>
+      <p>{{timestamp}}</p>
+    </div>
+    {{/each}}
+  </div>
+</div>
 
-  <li>{{title}}</li>
 
-  {{/each}}
-</ul>
+
 {{!-- 
 <h2>Add a Cat</h2>
 <form class="create-form">

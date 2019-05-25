@@ -1,0 +1,17 @@
+body {
+  background-color: rgb(219, 238, 255);
+}
+
+/* ARTICLES VIEW */
+.article-box {
+  background-color: rgb(161, 193, 219);
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+}
+
+.article {
+  background-color: rgba(240, 248, 255, 0.76);
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 10px;
+}
