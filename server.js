@@ -28,7 +28,6 @@ mongoose.connect("mongodb://localhost/newsComments", {
 
 // Routes
 
-// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   axios
     .get("https://www.reuters.com/news/archive/technologyNews")
@@ -73,17 +72,16 @@ app.get("/scrape", function(req, res) {
   res.send("Scrape Complete");
 });
 
-// // Route for getting all Articles from the db
-// app.get("/articles", function(req, res) {
-//   // TODO: Finish the route so it grabs all of the articles
-//   db.Article.find({}, function(err, docs) {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(docs);
-//     }
-//   });
-// });
+app.get("/articles", function(req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  db.Article.find({}, function(err, docs) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(docs);
+    }
+  });
+});
 
 // // Route for grabbing a specific Article by id, populate it with it's note
 // app.get("/articles/:id", function(req, res) {
