@@ -14,6 +14,10 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
+// Set views engine
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Middleware
 
 app.use(logger("dev"));
@@ -72,13 +76,27 @@ app.get("/scrape", function(req, res) {
   res.send("Scrape Complete");
 });
 
+var test = [
+  {
+    num: "one"
+  },
+  {
+    num: "two"
+  },
+  {
+    num: "three"
+  },
+  {
+    num: "four"
+  }
+];
+
 app.get("/articles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
   db.Article.find({}, function(err, docs) {
     if (err) {
       res.json(err);
     } else {
-      res.json(docs);
+      res.render("index", { articles: docs });
     }
   });
 });
