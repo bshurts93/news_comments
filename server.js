@@ -73,30 +73,26 @@ app.get("/scrape", function(req, res) {
     });
 
   // Send a "Scrape Complete" message to the browser
-  res.send("Scrape Complete");
+  res.render("index", { message: "Scrape complete" });
 });
-
-var test = [
-  {
-    num: "one"
-  },
-  {
-    num: "two"
-  },
-  {
-    num: "three"
-  },
-  {
-    num: "four"
-  }
-];
 
 app.get("/articles", function(req, res) {
   db.Article.find({}, function(err, docs) {
     if (err) {
       res.json(err);
     } else {
-      res.render("index", { articles: docs });
+      res.render("index", { message: "Articles", articles: docs });
+    }
+  });
+});
+
+app.get("/delete", function(req, res) {
+  // Remove a note using the objectID
+  db.Article.deleteMany({}, function(err, success) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.render("index", { message: "Sucessfully deleted articles" });
     }
   });
 });
