@@ -4,6 +4,9 @@ body {
 
 img {
   max-width: 200px;
+  display: block;
+  margin: 0 auto;
+  line-height: 200px;
 }
 
 /* ARTICLES VIEW */

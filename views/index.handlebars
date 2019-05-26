@@ -3,22 +3,34 @@
 <div class="container">
   <div class="article-box">
     {{#each articles}}
+    <div class="article" data-id={{_id}}>
+      <div class="row">
+        <div class="col-lg-3 article-image">
+          <img src="{{image}}" alt="">
+        </div>
 
-    <div class="row article">
-      <div class="col-lg-3">
-        <img src="{{image}}" alt="">
+        <div class="col-lg-9 article-content">
+          <h3>{{title}}</h3>
+          <p>{{content}}</p>
+          <p>{{timestamp}}</p>
+          <a href="{{link}}" target="_blank">Read more</a>
+        </div>
       </div>
 
-      <div class="col-lg-9">
-        <h3>{{title}}</h3>
-        <p>{{content}}</p>
-        <p>{{timestamp}}</p>
-        <a href="{{link}}" target="_blank">Read more</a>
+      <div class="row">
+        <form id="comment-form" action="/submit" method="post" data-id={{_id}}>
+          <textarea type="text" name="comment" placeholder="comment"></textarea>
+
+          <button id="add-comment">Add comment</button>
+        </form>
       </div>
     </div>
+
     {{/each}}
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="app.js"></script>
 
 
 
