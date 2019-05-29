@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(219, 238, 255);
+  background-color: rgb(238, 247, 255);
 }
 
 img {
@@ -9,12 +9,24 @@ img {
   line-height: 200px;
 }
 
+textarea {
+  height: 3rem;
+  width: 55%;
+}
+
+#page-header {
+  margin-top: 5rem;
+}
+
 /* ARTICLES VIEW */
 .article-box {
-  background-color: rgb(161, 193, 219);
   padding: 0.5rem 2rem;
   border-radius: 10px;
   margin-bottom: 3rem;
+}
+
+.article-image {
+  text-align: center;
 }
 
 .article {
@@ -24,14 +36,37 @@ img {
   border-radius: 10px;
 }
 
+.comment-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .comments {
-  margin-top: 3rem;
   padding: 1rem;
-  background-color: rgba(169, 186, 223, 0.486);
+  /* background-color: rgba(169, 186, 223, 0.486); */
   width: 100%;
 }
 
 .comment {
-  background-color: rgba(238, 238, 238, 0.363);
   padding: 0.3rem;
+  border-bottom: 1px solid black;
+}
+
+.comment p {
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.form-btn {
+  height: 3rem;
+  width: 20%;
+}
+
+/* ICONS */
+
+.fas,
+.far {
+  padding: 0 0.8rem;
+  margin-left: -1rem;
 }

@@ -54,11 +54,11 @@ $(document).on("click", "#view-comments", function(e) {
     });
 
     $(this).attr("data-state", "shown");
-    $(this).text("Hide comments");
+    $(this).html("<i class='far fa-comment'></i>Hide comments");
   } else if ($(this).attr("data-state") === "shown") {
     $(commentBox).empty();
 
     $(this).attr("data-state", "hidden");
-    $(this).text("View comments");
+    $(this).html("<i class='far fa-comment'></i>View comments");
   }
 });

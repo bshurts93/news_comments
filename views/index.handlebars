@@ -1,4 +1,4 @@
-<h1 class="text-center">{{message}}</h1>
+<h1 id="page-header" class="text-center">{{message}}</h1>
 
 <div class="container">
   <div class="article-box">
@@ -7,24 +7,24 @@
       <div class="row">
         <div class="col-lg-3 article-image">
           <img src="{{image}}" alt="">
+          <a class="link" href="{{link}}" target="_blank">Read more</a>
         </div>
 
         <div class="col-lg-9 article-content">
-          <h3>{{title}}</h3>
-          <p>{{content}}</p>
-          <p>{{timestamp}}</p>
-          <a href="{{link}}" target="_blank">Read more</a>
+          <h3 class="title">{{title}}</h3>
+          <p class="text">{{content}}</p>
+          <p class="timestamp">{{timestamp}}</p>
+
         </div>
       </div>
 
-      <div class="row">
-        <form id="comment-form" action="/submit" method="post" data-id={{_id}}>
-          <textarea id="comment-field" type="text" name="comment" placeholder="comment"></textarea>
 
-          <button id="add-comment">Add comment</button>
-          <button id="view-comments" data-id={{_id}} data-state="hidden">View comments</button>
-        </form>
-      </div>
+      <form class="comment-form" action="/submit" method="post" data-id={{_id}}>
+        <textarea id="comment-field" type="text" name="comment" placeholder="comment"></textarea>
+        <button class="form-btn" id="add-comment"><i class="fas fa-plus-square"></i>Add comment</button>
+        <button class="form-btn" id="view-comments" data-id={{_id}} data-state="hidden"><i
+            class="far fa-comment"></i>View comments</button>
+      </form>
 
       <div class="row">
         <div class="comments" id="comments-{{_id}}">
@@ -38,6 +38,7 @@
     {{/each}}
   </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="app.js"></script>
 
