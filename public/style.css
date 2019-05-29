@@ -69,13 +69,14 @@ a:hover {
 }
 
 .comment {
-  padding: 0.3rem;
+  padding: 0.5rem;
   border-bottom: 1px solid black;
 }
 
 .comment p {
   padding: 1rem 0;
   margin: 0;
+  display: inline-block;
 }
 
 .form-control {
@@ -87,6 +88,13 @@ a:hover {
 .form-btn {
   height: 3rem;
   width: 20%;
+  background-color: rgb(245, 245, 245);
+}
+
+.delete-btn {
+  position: relative;
+  float: right;
+  height: 3rem;
   background-color: rgb(245, 245, 245);
 }
 

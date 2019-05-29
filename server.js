@@ -124,6 +124,12 @@ app.get("/delete", function(req, res) {
   });
 });
 
+app.get("/delete-comment/:id", function(req, res) {
+  db.Comment.deleteOne({ _id: req.params.id }).then(function(deleted) {
+    res.json(deleted);
+  });
+});
+
 app.post("/submit", function(req, res) {
   // Create a new Note in the db
   var articleId = req.body.articleId;

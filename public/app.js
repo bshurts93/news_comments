@@ -42,11 +42,18 @@ $(document).on("click", "#view-comments", function(e) {
       var comments = data.comments;
 
       comments.forEach(element => {
+        console.log(element);
+
         var newComment = $("<div>").addClass("comment");
 
         var text = $("<p>").text(element.text);
 
+        var deleteBtn = $("<button class='btn btn-outline-primary delete-btn'>")
+          .attr("data-comment_id", element._id)
+          .text("Delete");
+
         newComment.append(text);
+        newComment.append(deleteBtn);
 
         $(commentBox).append(newComment);
       });
@@ -71,4 +78,20 @@ $(document).on("click", "#delete", function() {
     window.location.href = "/delete";
   }
   console.log(userConfirm);
+});
+
+$(document).on("click", ".delete-btn", function() {
+  var commentID = $(this).attr("data-comment_id");
+
+  console.log(commentID);
+  var userConfirm = confirm("Delete comment?");
+
+  if (userConfirm) {
+    $.ajax({
+      method: "GET",
+      url: "/delete-comment/" + commentID
+    }).then(function(data) {
+      location.reload();
+    });
+  }
 });
