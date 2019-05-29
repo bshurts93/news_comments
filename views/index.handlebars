@@ -1,4 +1,4 @@
-<h1 id="page-header" class="text-center">{{message}}</h1>
+<h1 id="page-header" class="text-center"><i class="far fa-newspaper"></i>{{message}}</h1>
 
 <div class="container">
   <div class="article-box">
@@ -20,9 +20,11 @@
 
 
       <form class="comment-form" action="/submit" method="post" data-id={{_id}}>
-        <textarea id="comment-field" type="text" name="comment" placeholder="comment"></textarea>
-        <button class="form-btn" id="add-comment"><i class="fas fa-plus-square"></i>Add comment</button>
-        <button class="form-btn" id="view-comments" data-id={{_id}} data-state="hidden"><i
+        <textarea class="form-control" class="comment-field" type="text" name="comment"
+          placeholder="comment"></textarea>
+        <button class="btn btn-outline-success form-btn" id="add-comment"><i class="fas fa-plus-square"></i>Add
+          comment</button>
+        <button class="btn btn-outline-primary form-btn" id="view-comments" data-id={{_id}} data-state="hidden"><i
             class="far fa-comment"></i>View comments</button>
       </form>
 
@@ -33,7 +35,8 @@
       </div>
     </div>
 
-
+    {{else}}
+    <h3 class="text-center">Click scrape above to get new articles</h3>
 
     {{/each}}
   </div>

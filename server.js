@@ -99,18 +99,27 @@ app.get("/articles", function(req, res) {
     if (err) {
       res.json(err);
     } else {
-      res.render("index", { message: "Articles", articles: docs });
+      res.render("index", { message: "Your Articles", articles: docs });
     }
   });
 });
 
 app.get("/delete", function(req, res) {
-  // Remove a note using the objectID
   db.Article.deleteMany({}, function(err, success) {
     if (err) {
       res.json(err);
     } else {
-      res.render("index", { message: "Sucessfully deleted articles" });
+      res.render("index", {
+        message: "Sucessfully wiped DB"
+      });
+    }
+  });
+
+  db.Comment.deleteMany({}, function(err, success) {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log("success");
     }
   });
 });
@@ -127,9 +136,6 @@ app.post("/submit", function(req, res) {
 
   db.Comment.create(data)
     .then(function(dbComment) {
-      // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
-      // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
       return db.Article.findOneAndUpdate(
         { _id: articleId },
         { $push: { comments: dbComment._id } },
@@ -137,11 +143,9 @@ app.post("/submit", function(req, res) {
       );
     })
     .then(function(dbArticle) {
-      // If the User was updated successfully, send it back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurs, send it back to the client
       res.json(err);
     });
 });

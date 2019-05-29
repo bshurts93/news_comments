@@ -24,9 +24,8 @@ $(document).on("click", "#add-comment", function(e) {
     // With that done
     .then(function(data) {
       console.log(data);
+      $(textArea).val("");
     });
-
-  $("#comment-field").val("");
 });
 
 $(document).on("click", "#view-comments", function(e) {
@@ -61,4 +60,15 @@ $(document).on("click", "#view-comments", function(e) {
     $(this).attr("data-state", "hidden");
     $(this).html("<i class='far fa-comment'></i>View comments");
   }
+});
+
+$(document).on("click", "#delete", function() {
+  var userConfirm = confirm(
+    "Are you sure you want to wipe the DB? All saved comments and articles will be lost."
+  );
+
+  if (userConfirm) {
+    window.location.href = "/delete";
+  }
+  console.log(userConfirm);
 });

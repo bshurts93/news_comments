@@ -7,11 +7,7 @@ img {
   display: block;
   margin: 0 auto;
   line-height: 200px;
-}
-
-textarea {
-  height: 3rem;
-  width: 55%;
+  border-radius: 10px;
 }
 
 #page-header {
@@ -40,6 +36,7 @@ textarea {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 
 .comments {
@@ -56,6 +53,11 @@ textarea {
 .comment p {
   padding: 1rem 0;
   margin: 0;
+}
+
+.form-control {
+  height: 3rem !important;
+  width: 50%;
 }
 
 .form-btn {
