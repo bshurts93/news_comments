@@ -35,22 +35,30 @@ $(document).on("click", "#view-comments", function(e) {
   var thisId = $(this).attr("data-id");
   var commentBox = $("#comments-" + thisId);
 
-  console.log(commentBox);
+  if ($(this).attr("data-state") === "hidden") {
+    $.ajax({
+      method: "GET",
+      url: "/articles/" + thisId
+    }).then(function(data) {
+      var comments = data.comments;
 
-  $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId
-  }).then(function(data) {
-    var comments = data.comments;
+      comments.forEach(element => {
+        var newComment = $("<div>").addClass("comment");
 
-    comments.forEach(element => {
-      var newComment = $("<div>").addClass("comment");
+        var text = $("<p>").text(element.text);
 
-      var text = $("<p>").text(element.text);
+        newComment.append(text);
 
-      newComment.append(text);
-
-      $(commentBox).append(newComment);
+        $(commentBox).append(newComment);
+      });
     });
-  });
+
+    $(this).attr("data-state", "shown");
+    $(this).text("Hide comments");
+  } else if ($(this).attr("data-state") === "shown") {
+    $(commentBox).empty();
+
+    $(this).attr("data-state", "hidden");
+    $(this).text("View comments");
+  }
 });
