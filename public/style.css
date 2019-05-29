@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(238, 247, 255);
+  background-color: #92b4f4;
 }
 
 img {
@@ -11,7 +11,29 @@ img {
 }
 
 #page-header {
-  margin-top: 5rem;
+  color: #0a369d;
+  margin-top: 6rem;
+}
+
+a {
+  color: rgb(245, 245, 245);
+  transition: 0.5s all;
+}
+
+a:hover {
+  color: rgb(107, 235, 107);
+  text-decoration: none;
+}
+
+/* NAV */
+
+.navbar-light {
+  background-color: #0a369d !important;
+  color: #cfdee7;
+}
+
+.nav-link {
+  color: #cfdee7 !important;
 }
 
 /* ARTICLES VIEW */
@@ -26,7 +48,8 @@ img {
 }
 
 .article {
-  background-color: rgba(240, 248, 255, 0.76);
+  background-color: #5e7ce2;
+  color: rgb(245, 245, 245);
   padding: 2rem;
   margin: 2rem auto;
   border-radius: 10px;
@@ -58,11 +81,13 @@ img {
 .form-control {
   height: 3rem !important;
   width: 50%;
+  background-color: rgb(245, 245, 245);
 }
 
 .form-btn {
   height: 3rem;
   width: 20%;
+  background-color: rgb(245, 245, 245);
 }
 
 /* ICONS */
