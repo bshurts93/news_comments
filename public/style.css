@@ -23,3 +23,15 @@ img {
   margin: 2rem auto;
   border-radius: 10px;
 }
+
+.comments {
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: rgba(169, 186, 223, 0.486);
+  width: 100%;
+}
+
+.comment {
+  background-color: rgba(238, 238, 238, 0.363);
+  padding: 0.3rem;
+}

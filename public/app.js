@@ -11,10 +11,6 @@ $(document).on("click", "#add-comment", function(e) {
     .find("textarea")
     .val();
 
-  console.log(textArea);
-
-  console.log(thisId);
-
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -27,13 +23,34 @@ $(document).on("click", "#add-comment", function(e) {
   })
     // With that done
     .then(function(data) {
-      // // Log the response
-      // console.log(data);
-      // // Empty the notes section
-      // $("#notes").empty();
+      console.log(data);
     });
 
-  // // Also, remove the values entered in the input and textarea for note entry
-  // $("#titleinput").val("");
-  // $("#bodyinput").val("");
+  $("#comment-field").val("");
+});
+
+$(document).on("click", "#view-comments", function(e) {
+  e.preventDefault();
+
+  var thisId = $(this).attr("data-id");
+  var commentBox = $("#comments-" + thisId);
+
+  console.log(commentBox);
+
+  $.ajax({
+    method: "GET",
+    url: "/articles/" + thisId
+  }).then(function(data) {
+    var comments = data.comments;
+
+    comments.forEach(element => {
+      var newComment = $("<div>").addClass("comment");
+
+      var text = $("<p>").text(element.text);
+
+      newComment.append(text);
+
+      $(commentBox).append(newComment);
+    });
+  });
 });

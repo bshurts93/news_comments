@@ -19,12 +19,21 @@
 
       <div class="row">
         <form id="comment-form" action="/submit" method="post" data-id={{_id}}>
-          <textarea type="text" name="comment" placeholder="comment"></textarea>
+          <textarea id="comment-field" type="text" name="comment" placeholder="comment"></textarea>
 
           <button id="add-comment">Add comment</button>
+          <button id="view-comments" data-id={{_id}}>View comments</button>
         </form>
       </div>
+
+      <div class="row">
+        <div class="comments" id="comments-{{_id}}">
+
+        </div>
+      </div>
     </div>
+
+
 
     {{/each}}
   </div>
