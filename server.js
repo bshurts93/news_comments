@@ -31,6 +31,9 @@ mongoose.connect("mongodb://localhost/newsComments", {
 });
 
 // Routes
+app.get("/", function(req, res) {
+  res.redirect("/articles");
+});
 
 app.get("/scrape", function(req, res) {
   axios
